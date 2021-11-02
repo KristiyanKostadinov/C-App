@@ -1,105 +1,106 @@
 using System;
 
-namespace NumberGuesser
+namespace ConsoleApp1
 {
- 
     class Program
     {
-      
         static void Main(string[] args)
         {
-            GetAppInfo(); 
+            GetAppInfo();
+            Greetings();
 
-            GreetUser(); 
             while (true)
             {
                 Random random = new Random();
-                int correctNumber = random.Next(1, 10);
-
-               
+                int correct = random.Next(1, 10);
                 int guess = 0;
 
                 Console.WriteLine("Guess a number between 1 and 10");
 
-                while (guess != correctNumber)
+                while (guess != correct)
                 {
-             
                     string input = Console.ReadLine();
 
                     if (!int.TryParse(input, out guess))
                     {
-                        PrintColorMessage(ConsoleColor.Red, "Please use an actual number");
-
+                        PrintColorMessage(ConsoleColor.Red, "Type an actual guess!!! ");
                         continue;
+
                     }
 
-                  
                     guess = Int32.Parse(input);
 
-               
-                    if (guess != correctNumber)
+                    if (guess != correct)
                     {
-                        
-                        PrintColorMessage(ConsoleColor.Red, "Wrong number, please try again");
+                        PrintColorMessage(ConsoleColor.Red, "Wrong Number... Try again");
+
                     }
                 }
 
-          
-                PrintColorMessage(ConsoleColor.Yellow, "CORRECT!! You guessed it!");
+                PrintColorMessage(ConsoleColor.Green, "Yayy you guessed the number");
+                Console.WriteLine("Wanna play again? [Y] or [N]");
 
-
-                Console.WriteLine("Play Again? [Y or N]");
-
-  
                 string answer = Console.ReadLine().ToUpper();
 
-                if (answer == "Y") {
+                if (answer == "Y")
+                {
                     continue;
                 }
-                else if (answer == "N") {
+
+                else if (answer == "N")
+                {
                     return;
                 }
+
                 else
                 {
                     return;
                 }
-            }           
+
+
+
+
+            
+            }
+
+
+
 
         }
 
 
-        static void GetAppInfo() {
 
-            string appName = "Number Guesser";
+
+        static void GetAppInfo()
+        {
+            string appName = "Guess Number";
             string appVersion = "1.0.0";
-            string appAuthor = "Brad Traversy";
+            string author = "Kristiyan Kostadinov";
 
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(appName+ ": " + "Version: " + appVersion + " by: " + author);
+            Console.ResetColor();           
+        
+        }
 
-
-            Console.WriteLine("{0}: Version {1} by {2}", appName, appVersion, appAuthor);
-
-            Console.ResetColor();
+        static void Greetings() 
+        {
+            Console.WriteLine("Hello, what is your name? ");
+            string name = Console.ReadLine();
+            Console.WriteLine("Hi... " + name + " lets play a game!");
         }
 
 
-        static void GreetUser() {
-
-            Console.WriteLine("What is your name?");
-
-
-            string inputName = Console.ReadLine();
-
-            Console.WriteLine("Hello {0}, let's play a game...", inputName);
-        }
-
-
-        static void PrintColorMessage(ConsoleColor color, string message) {
+        static void PrintColorMessage(ConsoleColor color, string message)
+        {
             Console.ForegroundColor = color;
-
             Console.WriteLine(message);
-
             Console.ResetColor();
         }
+
+
+
+
+
     }
 }
